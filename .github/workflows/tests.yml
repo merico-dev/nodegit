@@ -16,27 +16,13 @@ jobs:
       matrix:
         node: [20]
     runs-on: ubuntu-latest
-    container: ubuntu:22.04
+    container: ubuntu:20.04
     steps:
       - name: Install Dependencies for Ubuntu
         # git >= 2.18 required for actions/checkout git support
-        run: apt-get update && apt-get install -y software-properties-common && add-apt-repository -y ppa:git-core/ppa && apt-get update && apt-get install -y git build-essential clang libssl-dev libkrb5-dev libc++-dev wget
+        run: apt update && apt install -y software-properties-common && add-apt-repository -y ppa:git-core/ppa && apt update && apt install -y git build-essential clang python3 libssl-dev libkrb5-dev libc++-dev
         env:
           ACTIONS_ALLOW_UNSECURE_COMMANDS: true
-
-      - name: Setup python 3.6
-        env:
-          CC: clang
-          CXX: clang++
-        run: |
-          mkdir ~/python
-          cd ~/python
-          wget https://www.python.org/ftp/python/3.6.15/Python-3.6.15.tgz
-          tar -xvf Python-3.6.15.tgz
-          cd Python-3.6.15
-          ./configure
-          make
-          make install
 
       - name: Setup Environment
         run: |
@@ -97,7 +83,7 @@ jobs:
     strategy:
       matrix:
         node: [20]
-    runs-on: macos-latest
+    runs-on: macOS-10.15
   # This is mostly the same as the Linux steps, waiting for anchor support
   # https://github.com/actions/runner/issues/1182
     steps:

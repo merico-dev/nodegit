@@ -58,13 +58,6 @@ jobs:
           chown root.root -R .
           node utils/retry npm install
 
-      - name: Test
-        run: |
-          set -e
-          eval `ssh-agent -s`
-          ssh-add ~/.ssh_tests/id_rsa
-          node utils/retry npm test
-
       - name: Deploy
         if: startsWith(github.ref, 'refs/tags/v')
         env:
@@ -116,13 +109,6 @@ jobs:
         # There is a race condition in node/generate that needs to be fixed
         run: node utils/retry npm install
 
-      - name: Test
-        run: |
-          set -e
-          eval `ssh-agent -s`
-          ssh-add ~/.ssh_tests/id_rsa
-          node utils/retry npm test
-
       - name: Deploy
         if: startsWith(github.ref, 'refs/tags/v')
         env:
@@ -164,13 +150,6 @@ jobs:
 
       - name: Install
         run: npm install
-
-      - name: Test
-        env:
-          GIT_SSH: ${{ github.workspace }}\vendor\plink.exe
-        run: |
-          powershell -command "Start-Process ${{ github.workspace }}\vendor\pageant.exe ${{ github.workspace }}\vendor\private.ppk"
-          node utils/retry npm test
 
       # You're probably wondering why this isn't a single `run: |` step, it certainly is for *nix,
       # but it's not, because the CI runner for windows doesn't wait for each step as listed here

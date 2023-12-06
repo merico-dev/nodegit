@@ -1,5 +1,5 @@
 {
-  "name": "nodegit",
+  "name": "@merico/nodegit",
   "description": "Node.js libgit2 asynchronous native bindings",
   "version": "0.28.0-alpha.21",
   "homepage": "http://nodegit.org",
@@ -64,7 +64,7 @@
   "binary": {
     "module_name": "nodegit",
     "module_path": "./build/Release/",
-    "host": "https://axonodegit.s3.amazonaws.com/nodegit/nodegit/"
+    "host": "https://nodegit.s3.ap-northeast-1.amazonaws.com/"
   },
   "scripts": {
     "cov": "npm run cppcov && npm run filtercov && npm run mergecov",

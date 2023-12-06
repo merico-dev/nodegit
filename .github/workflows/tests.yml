@@ -56,7 +56,6 @@ jobs:
         # https://stackoverflow.com/questions/70298238/getting-eaccess-when-running-npm-8-as-root
         run: |
           chown root.root -R .
-          npm set unsafe-perm true
           node utils/retry npm install
 
       - name: Test
